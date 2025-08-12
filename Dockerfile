@@ -1,14 +1,11 @@
 FROM n8nio/n8n:latest
 
-# Install ffmpeg
 USER root
-# Print OS details during build
+
+# Install ffmpeg using apk (Alpine)
+RUN apk update && apk add --no-cache ffmpeg
+
+# Optional: print OS info for confirmation
 RUN cat /etc/os-release
 
-RUN apt-get update && \
-    apt-get install -y ffmpeg && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Switch back to n8n user
 USER node
